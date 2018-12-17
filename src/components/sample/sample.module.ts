@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { SampleStore } from './sample.store';
 import { SampleController } from './sample.controller';
-import { HelloGenerator } from '../../common/hello.generator';
+import { HelloGenerator } from '../../common/services/hello.generator';
 
 @Module({
 	imports: [],
