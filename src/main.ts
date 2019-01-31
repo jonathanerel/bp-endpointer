@@ -7,8 +7,8 @@ async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 
 	const options = new DocumentBuilder()
-		.setTitle('Nest.js Seed example')
-		.setDescription('Nest.js microservice seed, with Swagger and custom lint validations')
+		.setTitle('Endpointer')
+		.setDescription('Nest.js microservice to contain dictionary of the microserivces endpoints, environment based')
 		.setVersion('0.0.0')
 		.build();
 	const document = SwaggerModule.createDocument(app, options);

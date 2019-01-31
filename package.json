@@ -1,7 +1,7 @@
 {
-  "name": "nestjs-seed",
+  "name": "bp-endpointer",
   "version": "0.0.0",
-  "description": "Nest.js microservice seed, with Swagger and custom lint validations",
+  "description": "Nest.js microservice to contain dictionary of the microserivces endpoints, environment based",
   "author": "Jonathan Erel",
   "license": "MIT",
   "scripts": {
@@ -21,8 +21,12 @@
   "dependencies": {
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
+    "@nestjs/mongoose": "^5.2.2",
     "@nestjs/swagger": "^2.5.1",
+    "automapper-ts": "^1.9.0",
     "cors": "^2.8.5",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.8",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
