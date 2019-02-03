@@ -5,26 +5,23 @@ import { groupBy, map, mapValues } from 'lodash';
 
 import { EndpointDto } from './models/endpoint.dto';
 import { Endpoint } from './models/endpoint.schema';
+import { IEndpointerCache } from './models/endpoint.types';
 
 @Injectable()
 export class EndpointerStore {
 	constructor(@InjectModel('Endpoint') private readonly endpointModel: Model<Endpoint>) {
 	}
 
-	async get(environment: string, expand: boolean): Promise<{ [environmentName: string]: [EndpointDto] } | [EndpointDto]> {
+	async get(environment: string): Promise<IEndpointerCache> {
 		const endpoints = await this.endpointModel.find(environment ? { environment } : {}).exec();
-		if (environment) {
-			return EndpointerStore.mapEndpointsToDto(endpoints);
-		} else {
-			if (expand) {
-				return mapValues(groupBy(endpoints, 'environment'), environmentEndpoints => EndpointerStore.mapEndpointsToDto(environmentEndpoints));
-			} else {
-				return map(endpoints, 'environment');
-			}
-		}
+		return EndpointerStore.parseEndpoints(endpoints);
 	}
 
-	private static mapEndpointsToDto(endpoints: [Endpoint]): [EndpointDto] {
+	private static parseEndpoints(endpoints) {
+		return mapValues(groupBy(endpoints, 'environment'), environmentEndpoints => EndpointerStore.mapEndpointsToDto(environmentEndpoints));
+	}
+
+	static mapEndpointsToDto(endpoints: [Endpoint]): [EndpointDto] {
 		return map(endpoints, (endpoint => new EndpointDto(endpoint)));
 	}
 
@@ -36,8 +33,5 @@ export class EndpointerStore {
 
 	async removeEndpoint(environment: string, name: string): Promise<boolean> {
 		return !!await this.endpointModel.findOneAndDelete({ environment, name });
-	}
-
-	clearCache(): void {
 	}
 }
