@@ -1,4 +1,4 @@
-import { ApiImplicitQuery, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse } from '@nestjs/swagger';
 import { Body, Delete, Get, HttpCode, Param, Post, Query } from '@nestjs/common';
 
 import { EndpointDto, GetEndpointsDto } from './models/endpoint.dto';
